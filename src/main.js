@@ -1,16 +1,17 @@
 // Nathan Altice
 // Created: 4/11/23
+// Updated: 1/13/24
 // A simple demo that illustrates texture atlas animation
-// Robot sprites created by pzUH: https://opengameart.org/content/the-robot-free-sprite
+// Robot sprites by pzUH: https://opengameart.org/content/the-robot-free-sprite
 
 class Demo extends Phaser.Scene {
     constructor() {
-        super('demoScene');
+        super('demoScene')
     }
 
     preload() {
         // load texture atlas
-        this.load.atlas('robot', 'assets/robotsheet.png', 'assets/robotsheet.json');
+        this.load.atlas('robot', 'assets/robotsheet.png', 'assets/robotsheet.json')
     }
 
     create() {
@@ -25,7 +26,7 @@ class Demo extends Phaser.Scene {
             }),
             frameRate: 15,
             repeat: -1      // loop animation
-        });
+        })
 
         this.anims.create({
             key: 'run',
@@ -37,7 +38,7 @@ class Demo extends Phaser.Scene {
             }),
             frameRate: 15,
             repeat: -1
-        });
+        })
 
         this.anims.create({
             key: 'slide',
@@ -49,29 +50,29 @@ class Demo extends Phaser.Scene {
             }),
             frameRate: 15,
             repeat: -1 
-        });
+        })
 
         // add robot
-        this.robot = this.add.sprite(config.width/2, config.height/2, 'robot', 'Idle (1)');
+        this.robot = this.add.sprite(config.width/2, config.height/2, 'robot', 'Idle (1)')
 
         // enable keyboard cursor control
-        cursors = this.input.keyboard.createCursorKeys();
+        cursors = this.input.keyboard.createCursorKeys()
 
         // instruction text
-        document.getElementById('info').innerHTML = 'Left/Right: Run | Down: Slide';
+        document.getElementById('info').innerHTML = 'Left/Right: Run | Down: Slide'
     }
 
     update() {
         if (cursors.right.isDown) {
-            this.robot.resetFlip();             // make sure sprite isn't flipped
-            this.robot.play('run', true);       // 'true' makes sure the anim won't re-trigger if it's already playing
+            this.robot.resetFlip()             // make sure sprite isn't flipped
+            this.robot.play('run', true)       // 'true' makes sure the anim won't re-trigger if it's already playing
         } else if (cursors.left.isDown) {
-            this.robot.setFlip(true, false);    // flip sprite on x-axis
-            this.robot.play('run', true);
+            this.robot.setFlip(true, false)    // flip sprite on x-axis
+            this.robot.play('run', true)
         } else if (cursors.down.isDown) {
-            this.robot.play('slide', true);
+            this.robot.play('slide', true)
         } else {
-            this.robot.play('idle', true);      // if no input, set to idle
+            this.robot.play('idle', true)      // if no input, set to idle
         }
     }
 }
@@ -84,5 +85,5 @@ config = {
     scene: [ Demo ]
 }
 
-const game = new Phaser.Game(config);
-let cursors;
+const game = new Phaser.Game(config)
+let cursors
